@@ -16,7 +16,7 @@ def generate_resume_data(name, contact, experience, projects, education, skills,
             "Content-Type": "application/json"
         }
         payload = {
-            "model": "llama3-8b-8192", # Groq ka Llama 3 model
+            "model": "llama-3.3-70b-versatile", # <--- Groq ka sabse naya aur stable model yahan update kar diya hai
             "messages": [{"role": "user", "content": prompt}],
             "response_format": {"type": "json_object"}
         }
