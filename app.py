@@ -157,7 +157,6 @@ with col_right:
             st.error("Name and Experience validation parameters are required.")
         else:
             with st.spinner("Processing local AI calculations..."):
-                # Call updated multi-variable generator
                 structured_json = generate_resume_data(
                     name_input, contact_input, exp_input, projects_input, edu_input, skills_input, cert_input, jd_input, selected_model
                 )
@@ -173,16 +172,15 @@ with col_right:
                     pdf_file_path = compile_pdf(structured_json, template_style=selected_layout)
                     
                     if os.path.exists(pdf_file_path):
+                        # CHANGER: Yahan se iframe ko hta diya h aur download button ko prime element bna diya h
+                        st.success("🎉 Your ATS-hardened resume has been successfully compiled!")
+                        
                         with open(pdf_file_path, "rb") as f:
-                            base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+                            pdf_bytes = f.read()
                         
-                        pdf_display_iframe = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="600px" style="border: 1px solid rgba(255,255,255,0.05); border-radius: 8px;"></iframe>'
-                        st.markdown(pdf_display_iframe, unsafe_allow_html=True)
-                        
-                        st.write("")
                         st.download_button(
                             label="📥 Download Tailored PDF Document",
-                            data=open(pdf_file_path, "rb"),
+                            data=pdf_bytes,
                             file_name=os.path.basename(pdf_file_path),
                             mime="application/pdf",
                             use_container_width=True
