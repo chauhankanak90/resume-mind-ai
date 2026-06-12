@@ -1,0 +1,14 @@
+# Local Streamlit secrets (Aapka password aur API keys)
+.streamlit/
+
+# Python cache files (Faltu temporary files)
+__pycache__/
+*.pyc
+
+# Local PDF files (Jo resumes test karte waqt generate huye)
+*.pdf
+
+# Virtual Environment (Agar aapne local env banaya ho toh)
+.venv/
+env/
+venv/
